@@ -4,7 +4,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "MioMods"
 name = "MioHotkeyMod"
-versionNumber = "0.0.1"
+versionNumber = "0.0.2"
 description = "more hotkeys"
 websiteUrl = "https://thunderstore.io"
 containsNsfwContent = false

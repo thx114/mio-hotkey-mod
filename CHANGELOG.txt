@@ -1,2 +1,6 @@
+# 0.0.2
+README and ICON
+
+
 # 0.0.1
 test

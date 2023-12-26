@@ -8,7 +8,7 @@
 ### 快捷键.Home界面分类选择:​  
 * shift+小键盘1: 地表/地面  
 * shift+小键盘2: 桥梁与道路  
-* shift+小键盘3: 小物件  
+* shift+小键盘3: 标志性建筑
 * shift+小键盘4: 水源,位置,动物  
 * shift+小键盘5: 灯  
 * shift+小键盘6: 站牌  
@@ -25,7 +25,7 @@
 ### Shortcut: Home Menu Categorization  
 * Shift+Num1: Terrain/Surface
 * Shift+Num2: Bridges and Roads
-* Shift+Num3: Small Objects
+* Shift+Num3: signature building
 * Shift+Num4: Water Sources, Locations, Animals
 * Shift+Num5: Lights
 * Shift+Num6: Signs
