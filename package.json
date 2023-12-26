@@ -1,0 +1,16 @@
+{
+  "name": "mio-i18n-cn",
+  "version": "1.2.9",
+  "description": "都市天际线2汉化模组",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "F_thx",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.19.8",
+    "hookui-framework": "github:captain-of-coit/hookui-framework"
+  }
+}
