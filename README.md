@@ -16,6 +16,19 @@
 * shift+小键盘8: 道路升级  
 * shift+小键盘9: 小物件  
 
-## 加入我们​
-自己喜欢的模组没有被汉化? 汉化不完全?  
-从 CSLBBS官方群 联系我: 1764362678  
+
+# MioHotkeyMod
+## Features
+### Shortcut: Road Alignment  
+* Shift+1: Build roads without grid
+* Shift+2: Expand intersection with curves  
+### Shortcut: Home Menu Categorization  
+* Shift+Num1: Terrain/Surface
+* Shift+Num2: Bridges and Roads
+* Shift+Num3: Small Objects
+* Shift+Num4: Water Sources, Locations, Animals
+* Shift+Num5: Lights
+* Shift+Num6: Signs
+* Shift+Num7: Road Symbols and Traffic Lights
+* Shift+Num8: Road Upgrades
+* Shift+Num9: Small Objects  
