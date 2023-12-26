@@ -8,11 +8,11 @@ using HookUILib.Core;
 #endif
 public static class mioPLUGIN
 {
-    public const string PLUGIN_GUID = "mio-i18n-cn";
-    public const string PLUGIN_NAME = "I18nCN";
-    public const string PLUGIN_VERSION = "1.2.9";
+    public const string PLUGIN_GUID = "mio-hotkey-mod";
+    public const string PLUGIN_NAME = "MioHotkeyMod";
+    public const string PLUGIN_VERSION = "0.0.1";
 }
-namespace I18nCN
+namespace MioHotkeyMod
 {
     [BepInPlugin(mioPLUGIN.PLUGIN_GUID, mioPLUGIN.PLUGIN_NAME, mioPLUGIN.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin {
@@ -26,12 +26,12 @@ namespace I18nCN
         }
     }
     public class PluginUI : UIExtension {
-        public new readonly string extensionID = "mio.I18nCN";
+        public new readonly string extensionID = "mio.hotkey";
         public new readonly string extensionContent;
         public new readonly ExtensionType extensionType = ExtensionType.Panel;
 
         public PluginUI() {
-            this.extensionContent = this.LoadEmbeddedResource("I18nCN.dist.bundle.js");
+            this.extensionContent = this.LoadEmbeddedResource("MioHotkeyMod.dist.bundle.js");
         }
     }
 }

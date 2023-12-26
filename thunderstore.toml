@@ -3,9 +3,9 @@ schemaVersion = "0.0.1"
 
 [package]
 namespace = "MioMods"
-name = "I18nCN"
-versionNumber = "1.2.9"
-description = "Translate the mod, translate all mods into Chinese "
+name = "MioHotkeyMod"
+versionNumber = "0.0.1"
+description = "more hotkeys"
 websiteUrl = "https://thunderstore.io"
 containsNsfwContent = false
 

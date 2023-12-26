@@ -17,11 +17,11 @@ build: clean restore build-ui
 package-win:
 	@-mkdir dist
 	@cmd /c copy /y "bin\Debug\netstandard2.1\0Harmony.dll" "dist\"
-	@cmd /c copy /y "bin\Debug\netstandard2.1\I18nCN.dll" "dist\"
+	@cmd /c copy /y "bin\Debug\netstandard2.1\MioHotkeyMod.dll" "dist\"
 	@echo Packaged to dist/
 
 package-unix: build
 	@-mkdir dist
 	@cp bin/Debug/netstandard2.1/0Harmony.dll dist
-	@cp bin/Debug/netstandard2.1/I18nCN.dll dist
+	@cp bin/Debug/netstandard2.1/MioHotkeyMod.dll dist
 	@echo Packaged to dist/
