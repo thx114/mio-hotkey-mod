@@ -1,11 +1,6 @@
 ﻿import React, { useEffect ,useCallback, useState } from 'react'
 import { $Panel, $Button } from 'hookui-framework'
 
-if (typeof jsyaml === 'undefined') {
-    const scriptYaml = document.createElement('script');
-    scriptYaml.src = 'https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js';
-    document.head.appendChild(scriptYaml);
-}
 class RIF {
     static Match(string, replaceMatch, rString) {
         return ((replaceMatch === 'full' && string === rString) || (replaceMatch === 'inc' && string.includes(rString)) || false)
