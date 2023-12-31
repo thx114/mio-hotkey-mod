@@ -6,7 +6,7 @@ namespace = "MioMods"
 name = "MioHotkeyMod"
 versionNumber = "0.0.3"
 description = "more hotkeys"
-websiteUrl = "https://thunderstore.io"
+websiteUrl = "https://github.com/thx114/mio-hotkey-mod"
 containsNsfwContent = false
 
 [package.dependencies]
