@@ -458,10 +458,17 @@ try {
 
     ),
         document.addEventListener('mousedown', function (event) {
-            window.MIOMOD_SAVE.global = {
-                x: event.clientX,
-                y: event.clientY
+
+            if (window.MIOMOD_SAVE.global) {
+                let { x, y } = window.MIOMOD_SAVE.global
+                if (x === event.clientX && y === event.clientY) { window.MIOMOD_SAVE.global.move = false }
+                else { window.MIOMOD_SAVE.global.move = true }
+            } else {
+                window.MIOMOD_SAVE.global = {} 
             }
+            
+            window.MIOMOD_SAVE.global.x = event.clientX
+            window.MIOMOD_SAVE.global.y = event.clientY
         });
         document.addEventListener('click', async (event) => {
             if (event.button === 0) {
@@ -474,7 +481,7 @@ try {
                 }
 
                 let currentTime = new Date().getTime();
-                if (currentTime - window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime < 400 && event.clientX === window.MIOMOD_SAVE.global.x && event.clientY === window.MIOMOD_SAVE.global.y) {
+                if (currentTime - window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime < 400 && window.MIOMOD_SAVE.global.move===false) {
                     for (item of CLICK2_ITEMS()) {
                         if (item.items.length > 0) { item.click; break }
                     }
