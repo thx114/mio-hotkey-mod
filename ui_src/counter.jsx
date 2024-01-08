@@ -354,6 +354,21 @@ try {
 
             ['shift', 'Digit6'], async () => { TrafficLights.save(6) },
             ['Digit6'], async () => { TrafficLights.load(6) },
+
+            ['shift', 'Digit7'], async () => { TrafficLights.save(6) },
+            ['Digit7'], async () => { TrafficLights.load(6) },
+
+            ['shift', 'Digit8'], async () => { TrafficLights.save(6) },
+            ['Digit6'], async () => { TrafficLights.load(6) },
+
+            ['shift', 'Digit6'], async () => { TrafficLights.save(6) },
+            ['Digit8'], async () => { TrafficLights.load(6) },
+
+            ['shift', 'Digit9'], async () => { TrafficLights.save(6) },
+            ['Digit9'], async () => { TrafficLights.load(6) },
+
+            ['shift', 'Digit0'], async () => { TrafficLights.save(6) },
+            ['Digit0'], async () => { TrafficLights.load(6) },
         )
 
     }
