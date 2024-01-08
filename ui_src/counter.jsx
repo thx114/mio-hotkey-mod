@@ -1,6 +1,10 @@
 ﻿import React, { useEffect ,useCallback, useState } from 'react'
 import { $Panel, $Button } from 'hookui-framework'
 
+if (typeof (window.MIOMOD_SAVE) == 'undefined') { window.MIOMOD_SAVE = {} }
+window.MIOMOD_SAVE.mio_hotkey_mod = {
+    TrafficLightsSave: {}
+}
 class RIF {
     static Match(string, replaceMatch, rString) {
         return ((replaceMatch === 'full' && string === rString) || (replaceMatch === 'inc' && string.includes(rString)) || false)
@@ -226,7 +230,6 @@ try {
                     await delay(40);
                     let list = 分类.includes(',') ? 分类.split(',') : [分类];
                     for (item of list) {
-                        console.log(list, item)
                         rif().q.to(item).obj.enable
                         await delay(40);
                     }
@@ -237,9 +240,68 @@ try {
 
             }
 
+        },
+        交通信号灯改善: {
+            get 车道保存() { return rif().class('button__ButtonComponent-c2vm-tle__sc-u09bwf-0') }
         }
     }
+
+
     function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+    function click(ITEM) {
+        const allProps = Object.keys(ITEM);
+        for (const prop of allProps) {
+            if (prop.startsWith('__reactProps')) {
+                try { ITEM[prop].onClick() } catch { }
+            }
+        }
+    }
+
+    class TrafficLights {
+        static getTrafficLightsNow() {
+            let panel = []
+            for (const line of rif().class('lane__Container-c2vm-tle__sc-vpfjbn-0.emcyeO').items) {
+                let Line = []
+                for (const sign of line.querySelectorAll('.traffic-sign-button__Button-c2vm-tle__sc-1b2zrmw-0')) {
+                    Line.push((sign.style.opacity === '1.000000'))
+                }
+                panel.push(Line)
+            }
+            return panel
+        }
+        static getTrafficLightsItems() {
+            let panel = []
+            for (const line of rif().class('lane__Container-c2vm-tle__sc-vpfjbn-0.emcyeO').items) {
+                let Line = []
+                for (const sign of line.querySelectorAll('.traffic-sign-button__Button-c2vm-tle__sc-1b2zrmw-0')) {
+                    Line.push(sign)
+                }
+                panel.push(Line)
+            }
+            return panel
+        }
+        static load(key) {
+            rif().class('traffic-sign-button__Button-c2vm-tle__sc-1b2zrmw-0').haveStyle('opacity: 1.000000;').click
+            let loadPanel = window.MIOMOD_SAVE.mio_hotkey_mod.TrafficLightsSave['_' + key]
+            if (!loadPanel || loadPanel.length === 0) {return }
+            let Items = TrafficLights.getTrafficLightsItems()
+            Items.forEach((line, lineIndex) => {
+                line.forEach((sign, signIndex) => {
+                    if (loadPanel[lineIndex][signIndex]) {
+                        click(sign)
+                    }
+                })
+            })
+        }
+        static save(key) {
+            let data = TrafficLights.getTrafficLightsNow()
+            if (data.length) {
+                window.MIOMOD_SAVE.mio_hotkey_mod.TrafficLightsSave['_' + key] = data
+            }
+        }
+
+    }
+
     HOTKEYS_ITEMS = {
         完美道路: RE(
             ['shift', 'Digit1'], async () => {
@@ -273,15 +335,104 @@ try {
             ['shift', 'NumPad7'], 按钮.DEV.add('trafficlightobject,trafficsignobject'),
             ['shift', 'NumPad8'], 按钮.DEV.add('netupgrade'),
             ['shift', 'NumPad9'], 按钮.DEV.add('subobjectdefaultprobability'),
+        ),
+        交通信号灯改善: RE(
+            ['shift', 'Digit1'], async () => { TrafficLights.save(1) },
+            ['Digit1'], async () => { TrafficLights.load(1) },
+
+            ['shift', 'Digit2'], async () => { TrafficLights.save(2) },
+            ['Digit2'], async () => { TrafficLights.load(2) },
+
+            ['shift', 'Digit3'], async () => { TrafficLights.save(3) },
+            ['Digit3'], async () => { TrafficLights.load(3) },
+
+            ['shift', 'Digit4'], async () => { TrafficLights.save(4) },
+            ['Digit4'], async () => { TrafficLights.load(4) },
+
+            ['shift', 'Digit5'], async () => { TrafficLights.save(5) },
+            ['Digit5'], async () => { TrafficLights.load(5) },
+
+            ['shift', 'Digit6'], async () => { TrafficLights.save(6) },
+            ['Digit6'], async () => { TrafficLights.load(6) },
         )
+
+    }
+    const CLICK_EMT = {
+        toolAtv: (svgName) => {
+            return async () => {
+                return (
+                    rif().class('tool-main-column_PaC').items.length > 0 &&
+                    rif().class('button_Yym.selected').hasHtml(svgName).items.length > 0 &&
+                    rif().class('active-infoview-panel_aTq').items.length > 0)
+            }
+        },
+
+    }
+    CLICK_ITEMS = {
+        公交面板增强: RE(
+            [CLICK_EMT.toolAtv('Bus.svg')],
+            async () => {
+                rif().class('infomode-item_K8b.active_m64').click; await delay(50);
+                rif().class('infomode-item_K8b').hasHtml('道路').click
+                rif().class('infomode-item_K8b').hasHtml('公交站').click
+                rif().class('infomode-item_K8b').hasHtml('交通路线').click
+            },
+
+            [CLICK_EMT.toolAtv('Train.svg')],
+            async () => {
+                rif().class('infomode-item_K8b.active_m64').click; await delay(50);
+                rif().class('infomode-item_K8b').hasHtml('火车轨道').click
+                rif().class('infomode-item_K8b').hasHtml('火车站').click
+                rif().class('infomode-item_K8b').hasHtml('交通路线').click
+            },
+
+            [CLICK_EMT.toolAtv('Tram.svg')],
+            async () => {
+                rif().class('infomode-item_K8b.active_m64').click; await delay(50);
+                rif().class('infomode-item_K8b').hasHtml('有轨电车轨道').click
+                rif().class('infomode-item_K8b').hasHtml('有轨电车站').click
+                rif().class('infomode-item_K8b').hasHtml('交通路线').click
+            },
+
+            [CLICK_EMT.toolAtv('Subway.svg')],
+            async () => {
+                rif().class('infomode-item_K8b.active_m64').click; await delay(50);
+                rif().class('infomode-item_K8b').hasHtml('地铁轨道').click
+                rif().class('infomode-item_K8b').hasHtml('地铁站').click
+                rif().class('infomode-item_K8b').hasHtml('交通路线').click
+            },
+
+            [CLICK_EMT.toolAtv('Ship.svg')],
+            async () => {
+                rif().class('infomode-item_K8b.active_m64').click; await delay(50);
+                rif().class('infomode-item_K8b').hasHtml('航道').click
+                rif().class('infomode-item_K8b').hasHtml('码头').click
+                rif().class('infomode-item_K8b').hasHtml('交通路线').click
+            },
+
+            [CLICK_EMT.toolAtv('Airplane.svg')],
+            async () => {
+                rif().class('infomode-item_K8b.active_m64').click; await delay(50);
+                rif().class('infomode-item_K8b').hasHtml('航站楼').click
+                rif().class('infomode-item_K8b').hasHtml('交通路线').click
+            },
+
+        )
+    }
+    CLICK2_ITEMS = () => {
+        return [
+            rif().class('panel__Container-c2vm-tle__sc-1et6j5f-0').class('button__ButtonComponent-c2vm-tle__sc-u09bwf-0'),
+            rif().class('main-panel__Container-c2vm-tle__sc-1bltd-0').class('row__Container-c2vm-tle__sc-10rns0c-0').hasHtml('保存')
+
+        ]
     }
     document.addEventListener('keydown', async (event) => {
         for (const [ObjName, ObjReItems] of Object.entries(HOTKEYS_ITEMS)) {
             for (const [Keys, Func] of ObjReItems) {
                 if (
-                    ((Keys.includes('shift')) ? event.shiftKey : true) &&
-                    ((Keys.includes('alt')) ? event.altKey : true) &&
-                    ((Keys.includes('ctrl')) ? event.ctrlKey : true) &&
+                    ((Keys.includes('shift')) ? event.shiftKey : !event.shiftKey) &&
+                    ((Keys.includes('alt')) ? event.altKey : !event.altKey) &&
+                    ((Keys.includes('ctrl')) ? event.ctrlKey : !event.ctrlKey) &&
                     (Keys.includes(event.code))
                 ) {
                     await Func()
@@ -289,5 +440,38 @@ try {
             }
         }
     }
-    )
+
+    ),
+        document.addEventListener('mousedown', function (event) {
+            window.MIOMOD_SAVE.global = {
+                x: event.clientX,
+                y: event.clientY
+            }
+        });
+        document.addEventListener('click', async (event) => {
+            if (event.button === 0) {
+                for (const [ObjName, ObjReItems] of Object.entries(CLICK_ITEMS)) {
+                    for (const [Keys, Func] of ObjReItems) {
+                        if (await Keys[0]()) {
+                            await Func()
+                        }
+                    }
+                }
+
+                let currentTime = new Date().getTime();
+                if (currentTime - window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime < 400 && event.clientX === window.MIOMOD_SAVE.global.x && event.clientY === window.MIOMOD_SAVE.global.y) {
+                    for (item of CLICK2_ITEMS()) {
+                        if (item.items.length > 0) { item.click; break }
+                    }
+                }
+                window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime = currentTime;
+
+            }
+        });
+
+    
+
+
+
+
 } catch { }
