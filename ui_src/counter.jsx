@@ -387,6 +387,7 @@ try {
         公交面板增强: RE(
             [CLICK_EMT.toolAtv('Bus.svg')],
             async () => {
+                if (rif().class('infomode-item_K8b.active_m64').items.length === 3 && rif().class('infomode-item_K8b.active_m64').hasHtml('公交站').items.length >0) { return }
                 rif().class('infomode-item_K8b.active_m64').click; await delay(50);
                 rif().class('infomode-item_K8b').hasHtml('道路').click
                 rif().class('infomode-item_K8b').hasHtml('公交站').click
@@ -395,6 +396,7 @@ try {
 
             [CLICK_EMT.toolAtv('Train.svg')],
             async () => {
+                if (rif().class('infomode-item_K8b.active_m64').items.length === 3 && rif().class('infomode-item_K8b.active_m64').hasHtml('火车站').items.length > 0) { return }
                 rif().class('infomode-item_K8b.active_m64').click; await delay(50);
                 rif().class('infomode-item_K8b').hasHtml('火车轨道').click
                 rif().class('infomode-item_K8b').hasHtml('火车站').click
@@ -403,6 +405,7 @@ try {
 
             [CLICK_EMT.toolAtv('Tram.svg')],
             async () => {
+                if (rif().class('infomode-item_K8b.active_m64').items.length === 3 && rif().class('infomode-item_K8b.active_m64').hasHtml('有轨电车站').items.length > 0) { return }
                 rif().class('infomode-item_K8b.active_m64').click; await delay(50);
                 rif().class('infomode-item_K8b').hasHtml('有轨电车轨道').click
                 rif().class('infomode-item_K8b').hasHtml('有轨电车站').click
@@ -411,6 +414,7 @@ try {
 
             [CLICK_EMT.toolAtv('Subway.svg')],
             async () => {
+                if (rif().class('infomode-item_K8b.active_m64').items.length === 3 && rif().class('infomode-item_K8b.active_m64').hasHtml('地铁站').items.length > 0) { return }
                 rif().class('infomode-item_K8b.active_m64').click; await delay(50);
                 rif().class('infomode-item_K8b').hasHtml('地铁轨道').click
                 rif().class('infomode-item_K8b').hasHtml('地铁站').click
@@ -419,6 +423,7 @@ try {
 
             [CLICK_EMT.toolAtv('Ship.svg')],
             async () => {
+                if (rif().class('infomode-item_K8b.active_m64').items.length === 3 && rif().class('infomode-item_K8b.active_m64').hasHtml('码头').items.length > 0) { return }
                 rif().class('infomode-item_K8b.active_m64').click; await delay(50);
                 rif().class('infomode-item_K8b').hasHtml('航道').click
                 rif().class('infomode-item_K8b').hasHtml('码头').click
@@ -427,6 +432,7 @@ try {
 
             [CLICK_EMT.toolAtv('Airplane.svg')],
             async () => {
+                if (rif().class('infomode-item_K8b.active_m64').items.length === 2 && rif().class('infomode-item_K8b.active_m64').hasHtml('航站楼').items.length > 0) {return }
                 rif().class('infomode-item_K8b.active_m64').click; await delay(50);
                 rif().class('infomode-item_K8b').hasHtml('航站楼').click
                 rif().class('infomode-item_K8b').hasHtml('交通路线').click
