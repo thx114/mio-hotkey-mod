@@ -25,6 +25,10 @@
 * `左键`：如果打开公交交通视图，且选择了工具栏的交通资产，则只显示对应公交元素
 
 ## 更新日志
+* **0.0.7 hotfix**  
+  修复重复加载js导致的无法开启交通灯车道问题
+  修复双击左键关闭菜单的多语言支持问题
+
 * **0.0.6 hotfix**  
   修复全局左键导致的交通面板重复勾选，太吵了！
 
@@ -65,6 +69,10 @@
 * `Left mouse button`: If the public transport view is open and a traffic asset is selected in the toolbar, only the corresponding public transport elements are displayed.
 
 ## Update Log
+* **0.0.7 Hotfix**  
+  Fixed an issue with the inability to enable Traffic Lights Enhancement Mod lanes due to the repeated loading of JavaScript.
+  Addressed a multilingual support problem related to double-clicking the left mouse button to close the menu.
+
 * **0.0.6 Hotfix**  
   Fixed the issue of repeated selection in the traffic panel caused by the global left-click. (Too noisy!!!)
 

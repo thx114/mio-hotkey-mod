@@ -443,59 +443,70 @@ try {
     CLICK2_ITEMS = () => {
         return [
             rif().class('panel__Container-c2vm-tle__sc-1et6j5f-0').class('button__ButtonComponent-c2vm-tle__sc-u09bwf-0'),
-            rif().class('main-panel__Container-c2vm-tle__sc-1bltd-0').class('row__Container-c2vm-tle__sc-10rns0c-0').hasHtml('保存')
+            (() => {
+                let item = rif().class('main-panel__Container-c2vm-tle__sc-1bltd-0').class('row__Container-c2vm-tle__sc-10rns0c-0').hasHtml('button__ButtonComponent-c2vm-tle__sc-u09bwf-0')
+                item.items = [item.items[2]]
+                return item
+            })()
 
         ]
     }
-    document.addEventListener('keydown', async (event) => {
-        for (const [ObjName, ObjReItems] of Object.entries(HOTKEYS_ITEMS)) {
-            for (const [Keys, Func] of ObjReItems) {
-                if (
-                    ((Keys.includes('shift')) ? event.shiftKey : !event.shiftKey) &&
-                    ((Keys.includes('alt')) ? event.altKey : !event.altKey) &&
-                    ((Keys.includes('ctrl')) ? event.ctrlKey : !event.ctrlKey) &&
-                    (Keys.includes(event.code))
-                ) {
-                    await Func()
+
+
+    if (!document.getElementById('mioHotkeyMod')) {
+        document.addEventListener('keydown', async (event) => {
+            for (const [ObjName, ObjReItems] of Object.entries(HOTKEYS_ITEMS)) {
+                for (const [Keys, Func] of ObjReItems) {
+                    if (
+                        ((Keys.includes('shift')) ? event.shiftKey : !event.shiftKey) &&
+                        ((Keys.includes('alt')) ? event.altKey : !event.altKey) &&
+                        ((Keys.includes('ctrl')) ? event.ctrlKey : !event.ctrlKey) &&
+                        (Keys.includes(event.code))
+                    ) {
+                        await Func()
+                    }
                 }
             }
         }
-    }
 
-    ),
-        document.addEventListener('mousedown', function (event) {
+        ),
+            document.addEventListener('mousedown', function (event) {
 
-            if (window.MIOMOD_SAVE.global) {
-                let { x, y } = window.MIOMOD_SAVE.global
-                if (x === event.clientX && y === event.clientY) { window.MIOMOD_SAVE.global.move = false }
-                else { window.MIOMOD_SAVE.global.move = true }
-            } else {
-                window.MIOMOD_SAVE.global = {} 
-            }
-            
-            window.MIOMOD_SAVE.global.x = event.clientX
-            window.MIOMOD_SAVE.global.y = event.clientY
-        });
+                if (window.MIOMOD_SAVE.global) {
+                    let { x, y } = window.MIOMOD_SAVE.global
+                    if (x === event.clientX && y === event.clientY) { window.MIOMOD_SAVE.global.move = false }
+                    else { window.MIOMOD_SAVE.global.move = true }
+                } else {
+                    window.MIOMOD_SAVE.global = {}
+                }
+
+                window.MIOMOD_SAVE.global.x = event.clientX
+                window.MIOMOD_SAVE.global.y = event.clientY
+            });
         document.addEventListener('click', async (event) => {
             if (event.button === 0) {
                 for (const [ObjName, ObjReItems] of Object.entries(CLICK_ITEMS)) {
                     for (const [Keys, Func] of ObjReItems) {
                         if (await Keys[0]()) {
-                            await Func()
+                            await Func(); console.log('Funced', ObjName)
                         }
                     }
                 }
 
                 let currentTime = new Date().getTime();
-                if (currentTime - window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime < 400 && window.MIOMOD_SAVE.global.move===false) {
+                if (currentTime - window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime < 400 && window.MIOMOD_SAVE.global.move === false) {
                     for (item of CLICK2_ITEMS()) {
-                        if (item.items.length > 0) { item.click; break }
+                        if (item.items.length > 0) { item.click; console.log('clicked', item); break }
                     }
                 }
                 window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime = currentTime;
 
             }
         });
+        mioHotkeyDiv = document.createElement('div')
+        mioHotkeyDiv.id = 'mioHotkeyMod'
+        document.head.appendChild(mioHotkeyDiv)
+    }
 
     
 
