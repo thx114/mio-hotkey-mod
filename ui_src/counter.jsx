@@ -249,12 +249,14 @@ try {
 
     function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
     function click(ITEM) {
-        const allProps = Object.keys(ITEM);
-        for (const prop of allProps) {
-            if (prop.startsWith('__reactProps')) {
-                try { ITEM[prop].onClick() } catch { }
+        try {
+            const allProps = Object.keys(ITEM);
+            for (const prop of allProps) {
+                if (prop.startsWith('__reactProps')) {
+                    try { ITEM[prop].onClick() } catch { }
+                }
             }
-        }
+        } catch { }
     }
 
     class TrafficLights {
@@ -496,7 +498,8 @@ try {
                 let currentTime = new Date().getTime();
                 if (currentTime - window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime < 400 && window.MIOMOD_SAVE.global.move === false) {
                     for (item of CLICK2_ITEMS()) {
-                        if (item.items.length > 0) { item.click; console.log('clicked', item); break }
+                        if (item.items.length > 0) {
+                            try { item.click } catch { }; console.log('clicked', item); break }
                     }
                 }
                 window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime = currentTime;
