@@ -20,12 +20,28 @@
 * `shift+1~9`: 保存车道设置
 * `1~9`: 加载车道设置  
   
+### 快捷键 调试
+* `alt+shift` : 高亮并console.log选中元素
+
+### 滚轮 RICO 模组 - 资产翻页
+* 资产标签栏左右翻页
+* 资产内容上下翻页
+
 ### 全局快捷键
-* `双击左键`：智能保存/关闭面板
-* `左键`：如果打开公交交通视图，且选择了工具栏的交通资产，则只显示对应公交元素
+* `双击左键`: 智能保存/关闭面板
+* `左键`: 如果打开公交交通视图，且选择了工具栏的交通资产，则只显示对应公交元素
 
 ## 更新日志
-* **0.0.8 hotfix** 
+* **0.1.0**  
+  新增鼠标悬浮检测
+  新增滚轮快捷键: （RICO MOD）
+    - 资产标签栏左右翻页
+	- 资产内容上下翻页
+  新增调试快捷键: alt+shift 高亮并console.log选中元素
+
+  重构代码,更易阅读和维护
+
+* **0.0.8 hotfix**   
   修复双击左键报错
 
 * **0.0.7 hotfix**  
@@ -67,16 +83,32 @@
 * `Shift + 1~9`: Save lane configurations
 * `1~9`: Load lane configurations
 
+### Shortcut Keys for Debugging
+* `Alt+Shift`: Highlight and console.log the selected element
+
+### Scroll Wheel for RICO mod - Asset Pagination
+* Scroll left and right in the asset tab bar
+* Scroll up and down in the asset content
+
+
 ### Global Shortcut Keys
 * `Double-click left mouse button`: Smart save/close panel
 * `Left mouse button`: If the public transport view is open and a traffic asset is selected in the toolbar, only the corresponding public transport elements are displayed.
 
 ## Update Log
-* **0.0.8 Hotfix** 
+* **0.1.0**  
+  Added mouse hover detection.  
+  Added wheel shortcuts (RICO MOD):  
+    - Asset tab scrolling (left and right).  
+    - Asset content scrolling (up and down).  
+  Added debug shortcut: alt+shift to highlight and console.log the selected element.  
+  Refactored code for improved readability and maintainability.
+
+* **0.0.8 Hotfix**   
   Fix the error caused by double-clicking the left mouse button.  
   
 * **0.0.7 Hotfix**  
-  Fixed an issue with the inability to enable Traffic Lights Enhancement Mod lanes due to the repeated loading of JavaScript.
+  Fixed an issue with the inability to enable Traffic Lights Enhancement Mod lanes due to the repeated loading of JavaScript.  
   Addressed a multilingual support problem related to double-clicking the left mouse button to close the menu.
 
 * **0.0.6 Hotfix**  
