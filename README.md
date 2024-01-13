@@ -32,6 +32,10 @@
 * `左键`: 如果打开公交交通视图，且选择了工具栏的交通资产，则只显示对应公交元素
 
 ## 更新日志
+* **0.1.1**
+  修复公交面板Bug
+  修复双击bug
+
 * **0.1.0**  
   新增鼠标悬浮检测
   新增滚轮快捷键: （RICO MOD）
@@ -96,6 +100,11 @@
 * `Left mouse button`: If the public transport view is open and a traffic asset is selected in the toolbar, only the corresponding public transport elements are displayed.
 
 ## Update Log
+
+* **0.1.1**
+   Fixed a bug in the info panel.
+   Resolved an issue with double-clicking.
+
 * **0.1.0**  
   Added mouse hover detection.  
   Added wheel shortcuts (RICO MOD):  

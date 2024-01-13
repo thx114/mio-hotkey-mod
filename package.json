@@ -1,6 +1,6 @@
 {
   "name": "mio-hotley-mod",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "more hotkeys",
   "main": "index.js",
   "scripts": {

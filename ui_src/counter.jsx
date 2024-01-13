@@ -365,7 +365,7 @@ class InfomodesPanel {
     }
     static clickAllItems(...ButtonIndexList) {
         for (item of [...ButtonIndexList]) {
-            InfomodesPanel.getPanelItems().index(index).click
+            InfomodesPanel.getPanelItems().index(item).click
         }
     }
     static clear() {
@@ -386,44 +386,44 @@ class InfomodesPanel {
     static ClickFuncs = RE(
         [InfomodesPanel.toolAtv('Bus.svg')],
         async () => {
-            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(4)) return;
+            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(5)) return;
             InfomodesPanel.clear(); await delay(50);
-            InfomodesPanel.clickAllItems(4, 14, 13)
+            InfomodesPanel.clickAllItems(5, 15, 14)
         },
 
         [InfomodesPanel.toolAtv('Train.svg')],
         async () => {
-            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(5)) return;
+            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(6)) return;
             InfomodesPanel.clear(); await delay(50);
-            InfomodesPanel.clickAllItems(5, 15, 13)
+            InfomodesPanel.clickAllItems(6, 16, 14)
         },
 
         [InfomodesPanel.toolAtv('Tram.svg')],
         async () => {
-            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(6)) return;
+            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(7)) return;
             InfomodesPanel.clear(); await delay(50);
-            InfomodesPanel.clickAllItems(6, 16, 13)
+            InfomodesPanel.clickAllItems(7, 17, 14)
         },
 
         [InfomodesPanel.toolAtv('Subway.svg')],
         async () => {
-            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(7)) return;
+            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(8)) return;
             InfomodesPanel.clear(); await delay(50);
-            InfomodesPanel.clickAllItems(7, 17, 13)
+            InfomodesPanel.clickAllItems(8, 18, 14)
         },
 
         [InfomodesPanel.toolAtv('Ship.svg')],
         async () => {
-            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(8)) return;
+            if (InfomodesPanel.getActiveItemNum() === 3 && InfomodesPanel.getItemState(9)) return;
             InfomodesPanel.clear(); await delay(50);
-            InfomodesPanel.clickAllItems(8, 18, 13)
+            InfomodesPanel.clickAllItems(9, 19, 14)
         },
 
         [InfomodesPanel.toolAtv('Airplane.svg')],
         async () => {
-            if (InfomodesPanel.getActiveItemNum() === 2 && InfomodesPanel.getItemState(9)) return;
+            if (InfomodesPanel.getActiveItemNum() === 2 && InfomodesPanel.getItemState(10)) return;
             InfomodesPanel.clear(); await delay(50);
-            InfomodesPanel.clickAllItems(9, 13)
+            InfomodesPanel.clickAllItems(10, 14)
         },
 
     )
@@ -486,7 +486,7 @@ try {
         // Add All Hotekys and ClickEvent
         let HOTKEYS_ITEMS = {}
         let CLICK_ITEMS = {}
-        let CLICK2_ITEMS = []
+        let CLICK2_ITEMS = function () { }
         let OVER_ITEMS = []
         let WHEEL_ITEMS = []
 
@@ -499,11 +499,11 @@ try {
         ClickFuncs.forEach((item, index) => { CLICK_ITEMS[index] = item.ClickFuncs })
         OverFuncs.forEach(item => { OVER_ITEMS = [...OVER_ITEMS, ...item.OverFuncs] })
         WheelFuncs.forEach(item => { WHEEL_ITEMS = [...WHEEL_ITEMS, ...item.WheelFuncs] })
-        CLICK2_ITEMS = SmartClosePanel.getpanelList()
+        CLICK2_ITEMS = SmartClosePanel.getpanelList
 
         console.log('MioHotkeys - All hotkeys and event Loaded:', LE = [HOTKEYS_ITEMS, CLICK_ITEMS, CLICK2_ITEMS, OVER_ITEMS, WHEEL_ITEMS], (() => { if (LE[0] && LE[1] && LE[2])return 'Succ'})())
 
-        window.MIOMOD_SAVE.mio_hotkey_mod.Event = {
+        window.MIOMOD_SAVE.mio_hotkey_mod.Event = { 
             // KeyEvent
             keydown: async (event) => {
                 for (const [ObjName, ObjReItems] of Object.entries(HOTKEYS_ITEMS)) {
@@ -570,7 +570,7 @@ try {
                     }
                     let currentTime = new Date().getTime();
                     if (currentTime - window.MIOMOD_SAVE.mio_hotkey_mod.lastClickTime < 400 && window.MIOMOD_SAVE.global.move === false) {
-                        for (item of CLICK2_ITEMS) {
+                        for (item of CLICK2_ITEMS()) {
                             if (item.items.length > 0) { try { item.click } catch { }; break }
                         }
                     }

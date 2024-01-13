@@ -10,7 +10,7 @@ public static class mioPLUGIN
 {
     public const string PLUGIN_GUID = "mio-hotkey-mod";
     public const string PLUGIN_NAME = "MioHotkeyMod";
-    public const string PLUGIN_VERSION = "0.1.0";
+    public const string PLUGIN_VERSION = "0.1.1";
 }
 namespace MioHotkeyMod
 {
