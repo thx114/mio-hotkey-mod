@@ -21,9 +21,14 @@
 * `1~9`: 加载车道设置  
   
 ### 快捷键 调试
-* `alt+shift` : 高亮并console.log选中元素
+* `alt+shift` : 高亮元素
+* `shift + alt + z` :输出鼠标指向的DOM元素
+* `shift + alt + Num1` : 输出资产信息
+* `shift + alt + Num2` : 输出悬浮框
+* `shift + alt + Num3` : 输出设置详情
+* `shift + alt + Num4` : 输出鼠标悬浮框
 
-### 滚轮 RICO 模组 - 资产翻页
+### 滚轮 - 资产翻页
 * 资产标签栏左右翻页
 * 资产内容上下翻页
 
@@ -31,7 +36,19 @@
 * `双击左键`: 智能保存/关闭面板
 * `左键`: 如果打开公交交通视图，且选择了工具栏的交通资产，则只显示对应公交元素
 
+### 其他
+* 使用快捷键时将在右上角提示快捷键  
+
 ## 更新日志
+* **0.1.2**
+  长按shift将在右上角显示快捷键（需要显示fps）
+  新增调试快捷键:
+  - shift + alt + z :输出鼠标指向的DOM元素
+  - shift + alt + Num1 : 输出资产信息
+  - shift + alt + Num2 : 输出悬浮框
+  - shift + alt + Num3 : 输出设置详情
+  - shift + alt + Num4 : 输出鼠标悬浮框
+
 * **0.1.1**
   修复公交面板Bug
   修复双击bug
@@ -88,9 +105,14 @@
 * `1~9`: Load lane configurations
 
 ### Shortcut Keys for Debugging
-* `Alt+Shift`: Highlight and console.log the selected element
+* `alt+shift`: Highlight Element
+* `shift + alt + z`: Output the DOM element under the mouse cursor
+* `shift + alt + Num1`: Output Asset Information
+* `shift + alt + Num2`: Output Tooltip
+* `shift + alt + Num3`: Output Settings Details
+* `shift + alt + Num4`: Output Mouse Hover Box
 
-### Scroll Wheel for RICO mod - Asset Pagination
+### Scroll Wheel - Asset Pagination
 * Scroll left and right in the asset tab bar
 * Scroll up and down in the asset content
 
@@ -99,7 +121,17 @@
 * `Double-click left mouse button`: Smart save/close panel
 * `Left mouse button`: If the public transport view is open and a traffic asset is selected in the toolbar, only the corresponding public transport elements are displayed.
 
+### Others
+* When using shortcuts, the shortcuts will be displayed in the upper right corner as a reminder.  
 ## Update Log
+* **0.1.2**
+  Press and hold Shift to display shortcuts in the upper right corner (fps display required).  
+  Added debugging shortcuts:  
+  * shift + alt + z: Output the DOM element under the mouse cursor
+  * shift + alt + Num1: Output Asset Information
+  * shift + alt + Num2: Output Tooltip
+  * shift + alt + Num3: Output Settings Details
+  * shift + alt + Num4: Output Mouse Hover Box
 
 * **0.1.1**
    Fixed a bug in the info panel.

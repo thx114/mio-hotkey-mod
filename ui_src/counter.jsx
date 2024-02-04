@@ -5,7 +5,8 @@ if (typeof (window.MIOMOD_SAVE) == 'undefined') { window.MIOMOD_SAVE = {} }
 window.MIOMOD_SAVE.mio_hotkey_mod = {
     TrafficLightsSave: {}
 }
-
+window.MIOMOD_SAVE.Lock = {}
+window.MIOMOD_SAVE.loc = (document.documentElement.classList.value.includes('zh-HANS')) ?'cn':'en'
 if (document.getElementById('mioHotkeyMod')) { return }
 class RIF {
     static Match(string, replaceMatch, rString) {
@@ -214,7 +215,21 @@ function click(ITEM) {
         }
     } catch { }
 }
+async function Lock(name,time) {
+    async function _Lock(name, time = 0) {
+        if (typeof (window.MIOMOD_SAVE.Lock[name]) == 'undefined') { window.MIOMOD_SAVE.Lock[name] = false }
+        if ((!window.MIOMOD_SAVE.Lock[name]) && time === 0) { window.MIOMOD_SAVE.Lock[name] = true; return true }
+        else if (window.MIOMOD_SAVE.Lock[name] && time > 0) { await delay(time); window.MIOMOD_SAVE.Lock[name] = false }
+        else { return false }
+    }
+    if (await _Lock(name)) { _Lock(name, time); return true }
+    else { return false }
+
+}
 class Alignment {
+    static Loc = window.MIOMOD_SAVE.loc == 'cn' ?
+        '<p>shift + 1 : 无碎格铺路</p> <p>shift + 2 : 曲线拉大路口</p>' :
+        '<p>shift + 1 : Build roads without grid</p> <p>shift + 2 : Expand intersection with curves</p>'
     static Buttons = {
         get ExistingGeometry() { return rif().q.to('ExistingGeometry').select },
         get ObjectSide() { return rif().q.to('ObjectSide').select },
@@ -241,13 +256,26 @@ class Alignment {
             Alignment.Buttons.ObjectSide.disable; await delay(50);
             Alignment.Buttons.CellLength.disable; await delay(50);
             Alignment.Buttons.StraightDirection.enable; await delay(50);
+        },
+        ['shift', 'ShiftLeft'], async () => {
+            if (rif().class('button_KVN.button_KVN.multi-select_Roq').hasHtml('ZoneGrid').items.length) {
+                InfoP.Update(Alignment.Loc,
+                    {
+                        fontFamily: "Noto Sans SC",
+                        fontWeight: 'bold',
+                        textShadow: '1.000000rem 1.000000rem 5.000000rem rgba(0, 0, 0, 1.000000)',
+                        fontSize: '20.000000rem',
+                        justifyContent: 'flex-start'
+                    }
+                )
+            }
         }
     )
 }
 class HomeMenu {
     static add(pickerToPick) {
         return async () => {
-            s
+            
             HomeMenu.Buttons.picker.pickerButton.click
             await delay(40);
             HomeMenu.Buttons.picker.clearAllPicker.click
@@ -261,7 +289,9 @@ class HomeMenu {
             HomeMenu.Buttons.picker.pickerButton.click
         }
     }
-
+    static Loc = window.MIOMOD_SAVE.loc == 'cn' ?
+        '<p>shift + Num1 : 地面</p> <p>shift + Num2 : 道路</p> <p>shift + Num3 : 标志性<p> <p>shift + Num4 : 水源,位置,动物</p> <p>shift + Num5 : 灯光</p> <p>shift + Num6 : 公交站牌</p> <p>shift + Num7 : 道路标志</p><p>shift + Num8 : 道路升级</p><p>shift + Num9 : 小物件</p>' :
+        '<p>shift + Num1 : Surface</p> <p>shift + Num2 : Bridges and Roads</p> <p>shift + Num3 : signature building<p> <p>shift + Num4 : Water Sources, Locations, Animals</p> <p>shift + Num5 : Lights</p> <p>shift + Num6 : Signs</p> <p>shift + Num7 : Road Symbols and Traffic Lights</p><p>shift + Num8 : Road Upgrades</p><p>shift + Num9 : Small Objects</p>'
     static Buttons = {
         picker: {
             get pickerButton() { return rif().q.to().picker },
@@ -278,6 +308,19 @@ class HomeMenu {
             ['shift', 'NumPad7'], HomeMenu.add('trafficlightobject,trafficsignobject'),
             ['shift', 'NumPad8'], HomeMenu.add('netupgrade'),
             ['shift', 'NumPad9'], HomeMenu.add('subobjectdefaultprobability'),
+            ['shift', 'ShiftLeft'], async () => {
+                if (rif().class('picker-toggle_d6k').items.length) {
+                    InfoP.Update(HomeMenu.Loc,
+                    {
+                        fontFamily: "Noto Sans SC",
+                        fontWeight: 'bold',
+                        textShadow: '1.000000rem 1.000000rem 5.000000rem rgba(0, 0, 0, 1.000000)',
+                        fontSize: '20.000000rem',
+                        justifyContent: 'flex-start'
+                    }
+                )
+            }
+            }
         )
 }
 class TrafficLights {
@@ -477,7 +520,73 @@ class PloppableRICO {
 
     ]
 }
+class InfoP {
+    static Update(infoText, style = Object({ fontFamily : "Noto Sans SC" })) {
+        if (!document.getElementById('infop') && rif().class('fps-display_t30').items.length > 0) {
+            let infoDiv = document.createElement("div")
+            infoDiv.innerHTML = infoText
+            infoDiv.id = 'infop'
+            infoDiv.style.fontFamily = "Noto Sans SC"
+            infoDiv.children.forEach(a => {
+                for (const [ObjName, value] of Object.entries(style)) {
+                    a.style[ObjName] = value
+                }
+            })
 
+
+            rif().class('fps-display_t30').items[0].appendChild(infoDiv);
+        } else if (document.getElementById('infop')) {
+
+
+
+
+            if (document.getElementById('infop').innerHTML.includes(infoText.split('>')[1])) { return }
+            document.getElementById('infop').innerHTML += infoText
+            document.getElementById('infop').children.forEach(a => {
+                for (const [ObjName, value] of Object.entries(style)) {
+                    a.style[ObjName] = value
+                }
+    })
+
+}
+    }
+
+
+}
+class overDebug {
+    static Hotkeys = RE(
+        ['shift', 'alt', 'KeyZ'], async () => {
+            if (!await Lock('saz',200)) {return }
+            console.log(window.MIOMOD_SAVE.global.lastGreenedItem, window.MIOMOD_SAVE.global.lastGreenedItem.textContent)
+        },
+        ['shift', 'alt', 'NumPad1'], async () => {
+            if (!await Lock('sanp1', 200)) { return }
+            console.log(
+                rif().class('asset-detail-panel_hf8.detail-panel_izf').class('title-bar_I7O.child-opacity-transition_nkS').class('title_qub').items[0].textContent,
+                rif().class('asset-detail-panel_hf8.detail-panel_izf').class('content_rep.row_H0d.child-opacity-transition_nkS').class('column_dTT').class('paragraphs_nbD.description_ZQn').first.items[0].textContent
+            )
+        },
+        ['shift', 'alt', 'NumPad2'], async () => {
+            if (!await Lock('sanp2', 200)) { return }
+            console.log(
+                rif().class('balloon_qJY.balloon_H23.up_ehW.center_hug.anchored-balloon_AYp.up_el0').class('title_lCJ').items[0].textContent,
+                rif().class('balloon_qJY.balloon_H23.up_ehW.center_hug.anchored-balloon_AYp.up_el0').class('paragraphs_nbD.description_dNa').first.items[0].textContent
+            )
+    },
+        ['shift', 'alt', 'NumPad3'], async () => {
+            if (!await Lock('sanp3', 200)) { return }
+            console.log(
+                rif().class('option-page_CW8.option-section_VzQ').class('info-column_uQ0').class('info-description_wwd').items[0].textContent
+            )
+            
+    },
+        ['shift', 'alt', 'NumPad4'], async () => {
+            if (!await Lock('sanp4', 200)) { return }
+            rif().class('value_uLz').items.forEach(i => { console.log(i.textContent )})
+
+        }
+    )
+}
 try {
     if (!document.getElementById('mioHotkeyMod')) {
         if (!window.MIOMOD_SAVE.global) window.MIOMOD_SAVE.global = {};
@@ -490,7 +599,7 @@ try {
         let OVER_ITEMS = []
         let WHEEL_ITEMS = []
 
-        const HotkeyFuncs = [Alignment, HomeMenu, TrafficLights]
+        const HotkeyFuncs = [Alignment, HomeMenu, TrafficLights, overDebug]
         const ClickFuncs = [InfomodesPanel]
         const OverFuncs = [PloppableRICO]
         const WheelFuncs = [PloppableRICO]
@@ -513,7 +622,7 @@ try {
                             ((Keys.includes('alt')) ? event.altKey : !event.altKey) &&
                             ((Keys.includes('ctrl')) ? event.ctrlKey : !event.ctrlKey) &&
                             (Keys.includes(event.code))
-                        ) { await Func() }
+                        ) { await Func()}
                     }
                 }
                 if (window.MIOMOD_SAVE.global) {
@@ -598,18 +707,33 @@ try {
                         backgroundColor = hoveredElement.style.backgroundColor
                     }
                     if (!hoveredElement.classList.contains('style--default')) {
-                        hoveredElement.style.backgroundColor = 'lightgreen';
-                        console.log(hoveredElement,'colored')
 
+                        hoveredElement.style.backgroundColor = 'lightgreen';
+
+                        let Loc = window.MIOMOD_SAVE.loc == 'cn' ?
+                            '<p>shift + alt + z : 输出元素</p> <p>shift + alt + Num1 : 输出资产信息</p><p>shift + alt + Num2 : 输出悬浮框</p><p>shift + alt + Num3 : 输出设置详情</p><p>shift + alt + Num4 : 输出鼠标悬浮框</p>' :
+                            '<p>shift + alt + z : Output the DOM element under the mouse cursor</p> <p>shift + alt + Num1 : Output Asset Information</p><p>shift + alt + Num2 : Output Tooltip</p><p>shift + alt + Num3 : Output Settings Details</p><p>shift + alt + Num4 : Output Mouse Hover Box</p>'
+
+                        InfoP.Update(Loc,
+                            {
+                                fontFamily : "Noto Sans SC",
+                                fontWeight : 'bold',
+                                textShadow: '1.000000rem 1.000000rem 5.000000rem rgba(0, 0, 0, 1.000000)',
+                                fontSize: '20.000000rem',
+                                justifyContent: 'flex-start'
+                            }
+                        )
+                        
                         hoveredElement.addEventListener('mouseout', function () {
                             hoveredElement.style.backgroundColor = backgroundColor || '';
                         }, { once: true });
                         window.MIOMOD_SAVE.global.lastGreenedItem = hoveredElement
                         window.MIOMOD_SAVE.global.lastGreenedItembackgroundColor = backgroundColor
                     }
-                    
+
 
                 }
+                else if (document.getElementById('infop')) { document.getElementById('infop').innerHTML = ''}
             },
 
             // WheelEvent

@@ -4,7 +4,7 @@
 		<AssemblyName>MioHotkeyMod</AssemblyName>
 		<RootNamespace>MioHotkeyMod</RootNamespace>
 		<Description>more Hotkeys</Description>
-		<Version>0.1.1</Version>
+		<Version>0.1.2</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RestoreAdditionalProjectSources>
@@ -16,7 +16,7 @@
 		<NoWarn>MSB3277</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup>
-		<Cities2_Location>D:\SteamLibrary\steamapps\common\Cities Skylines II</Cities2_Location>
+		<Cities2_Location>D:\APPS\Steam\steamapps\common\Cities Skylines II</Cities2_Location>
 	</PropertyGroup>
 	<ItemGroup>
         <Reference Include="$(Cities2_Location)\Cities2_Data\Managed\Colossal.*.dll" Private="False"/>

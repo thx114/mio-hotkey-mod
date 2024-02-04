@@ -1,6 +1,6 @@
 {
   "name": "mio-hotley-mod",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "more hotkeys",
   "main": "index.js",
   "scripts": {
@@ -14,3 +14,5 @@
     "hookui-framework": "github:captain-of-coit/hookui-framework"
   }
 }
+
+

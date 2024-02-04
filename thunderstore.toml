@@ -4,14 +4,14 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "MioMods"
 name = "MioHotkeyMod"
-versionNumber = "0.1.1"
+versionNumber = "0.1.2"
 description = "more hotkeys"
 websiteUrl = "https://github.com/thx114/mio-hotkey-mod"
 containsNsfwContent = false
 
 [package.dependencies]
 BepInEx-BepInExPack = "5.4.2100"
-CaptainOfCoit-HookUI = "0.3.5"
+Cities2Modding-HookUI = "0.3.9"
 
 [build]
 icon = "./icon.png"
